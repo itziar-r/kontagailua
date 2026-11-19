@@ -20,26 +20,59 @@ import com.example.kontagailua.viewmodel.KontagailuViewModel
 @Composable
 fun KontagailuaScreen(viewModel: KontagailuViewModel, modifier: Modifier) {
 
-    val kontagailua = viewModel.kontagailua.collectAsState()
-
+    val kontagailuak = viewModel.kontagailuak.collectAsState().value
     Column(
         modifier = modifier
+            .fillMaxWidth()
+    )
+    {
+        KontagailuItem(
+            "Kontagailua 1",
+            kontagailuak.getOrNull(0) ?: 0,
+            { viewModel.kontagailuaHanditu(0) },
+            { viewModel.kontagailuaMurriztu(0) }
+        )
+        KontagailuItem(
+                "Kontagailua 2",
+        kontagailuak.getOrNull(1) ?: 0,
+        { viewModel.kontagailuaHanditu(1) },
+        { viewModel.kontagailuaMurriztu(1) }
+        )
+        KontagailuItem(
+            "Kontagailua 3",
+            kontagailuak.getOrNull(2) ?: 0,
+            { viewModel.kontagailuaHanditu(2) },
+            { viewModel.kontagailuaMurriztu(2) }
+        )
+    }
+
+}
+
+@Composable
+fun KontagailuItem(
+    izenburua: String,
+    balioa: Int,
+    onHanditu: () -> Unit,
+    onMurriztu: () -> Unit
+) {
+    Column(
+        modifier = Modifier
             .fillMaxWidth()
             .border(1.dp, MaterialTheme.colorScheme.outline, RectangleShape),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Kontagailua",
+            text = izenburua,
             style = MaterialTheme.typography.titleLarge
         )
         Text(
-            text = kontagailua.value.toString(),
+            text = balioa.toString(),
             style = MaterialTheme.typography.titleLarge
         )
-        Row() {
-            Button(onClick = { viewModel.kontagailuaHanditu() }) { Text(text = "+") }
-            Spacer (Modifier.width(8.dp))
-            Button(onClick = { viewModel.kontagailuaMurriztu() }) { Text(text = "-") }
+        Row {
+            Button(onClick = onHanditu) { Text(text = "+") }
+            Spacer(Modifier.width(8.dp))
+            Button(onClick = onMurriztu) { Text(text = "-") }
         }
     }
 }
