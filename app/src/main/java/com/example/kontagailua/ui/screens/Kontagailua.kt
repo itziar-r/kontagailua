@@ -1,5 +1,6 @@
 package com.example.kontagailua.ui.screens
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import com.example.kontagailua.viewmodel.KontagailuViewModel
 
@@ -21,7 +23,9 @@ fun KontagailuaScreen(viewModel: KontagailuViewModel, modifier: Modifier) {
     val kontagailua = viewModel.kontagailua.collectAsState()
 
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .border(1.dp, MaterialTheme.colorScheme.outline, RectangleShape),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
