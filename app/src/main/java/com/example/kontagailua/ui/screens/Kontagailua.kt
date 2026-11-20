@@ -26,26 +26,17 @@ fun KontagailuaScreen(viewModel: KontagailuViewModel, modifier: Modifier) {
             .fillMaxWidth()
     )
     {
-        KontagailuItem(
-            "Kontagailua 1",
-            kontagailuak.getOrNull(0) ?: 0,
-            { viewModel.kontagailuaHanditu(0) },
-            { viewModel.kontagailuaMurriztu(0) }
-        )
-        KontagailuItem(
-                "Kontagailua 2",
-        kontagailuak.getOrNull(1) ?: 0,
-        { viewModel.kontagailuaHanditu(1) },
-        { viewModel.kontagailuaMurriztu(1) }
-        )
-        KontagailuItem(
-            "Kontagailua 3",
-            kontagailuak.getOrNull(2) ?: 0,
-            { viewModel.kontagailuaHanditu(2) },
-            { viewModel.kontagailuaMurriztu(2) }
-        )
+        Column(modifier = modifier.fillMaxWidth()) {
+            kontagailuak.forEachIndexed { index, balioa ->
+                KontagailuItem(
+                    izenburua = "Kontagailua ${index + 1}",
+                    balioa = balioa,
+                    onHanditu = { viewModel.kontagailuaHanditu(index) },
+                    onMurriztu = { viewModel.kontagailuaMurriztu(index) }
+                )
+            }
+        }
     }
-
 }
 
 @Composable

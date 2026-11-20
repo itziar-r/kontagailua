@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import com.example.kontagailua.ui.screens.KontagailuaScreen
 import com.example.kontagailua.ui.theme.KontagailuaTheme
 import com.example.kontagailua.viewmodel.KontagailuViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +18,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             KontagailuaTheme {
-                val vm = KontagailuViewModel()
+                val vm: KontagailuViewModel = viewModel()
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     KontagailuaScreen(vm, modifier = Modifier.padding(innerPadding))
                 }
